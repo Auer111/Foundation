@@ -23,10 +23,22 @@ export default function App() {
     return () => subscription.unsubscribe()
   }, [])
 
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut()
+    if (error) console.error('Error logging out:', error.message)
+    setSession(null) // Clear the session
+  }
+
   if (!session) {
-    return (<Auth supabaseClient={supabase} appearance={{ theme: ThemeSupa }} />)
+    return (<Auth supabaseClient={supabase} providers={['google']} appearance={{ theme: ThemeSupa }} localization={{
+      variables: {
+        sign_up: {
+          social_provider_text: 'Sign up with Google',
+        },
+      },
+    }}  />)
   }
   else {
-    return (<div>Logged in!</div>)
+    return (<button onClick={handleLogout}>Log Out</button>)
   }
 }
