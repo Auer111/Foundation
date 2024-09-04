@@ -8,7 +8,8 @@ import Button from '@mui/material/Button';
 import { Snackbar } from '@mui/material'
 import { useReactPWAInstall } from './PWA/ReactPWAInstallContext'
 
-const supabase = createClient('https://kpfmmzljlaixrqyrcozk.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtwZm1temxqbGFpeHJxeXJjb3prIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjUzODMzODAsImV4cCI6MjA0MDk1OTM4MH0.OSRZwAC9hkX8I6rhhqo0ckVQm0dVUzZSc5RmDuBldc8')
+//https://supabase.com/dashboard/project/
+const supabase = createClient('Project URL', 'API Key')
 
 export default function App() {
   const [session, setSession] = useState(null)
