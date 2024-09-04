@@ -32,7 +32,7 @@ export default function App() {
   }
 
   if (!session) {
-    return (<Auth supabaseClient={supabase} providers={['google']} appearance={{ theme: ThemeSupa }} localization={{
+    return (<Auth supabaseClient={supabase} providers={['google']} appearance={{ theme: ThemeSupa }} onlyThirdPartyProviders showLinks={false} localization={{
       variables: {
         sign_up: {
           social_provider_text: 'Sign up with Google',
