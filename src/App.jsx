@@ -27,8 +27,8 @@ export default function App() {
       ),
       description: "This is how the install dialog looks like. Here you can describe your app briefly.",
     })
-      .then(() => alert("App installed successfully or instructions for install shown"))
-      .catch(() => alert("User opted out from installing"));
+      .then(() => console.log("App installed successfully or instructions for install shown"))
+      .catch(() => console.log("User opted out from installing"));
   };
 
   useEffect(() => {
