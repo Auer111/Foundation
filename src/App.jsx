@@ -58,9 +58,9 @@ export default function App() {
 // }
 
   const PWA = ()=><>{supported() && !isInstalled() && (
-    <button type="button" onClick={handlePwaClick} style={{ marginBottom: "50px", display: "block" }}>
+    <Button type="button" onClick={handlePwaClick} variant="outlined" style={{ width: "100%" }}>
       Install app
-    </button>
+    </Button>
   )}</>
 
   if (!session) {
