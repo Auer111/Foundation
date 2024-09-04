@@ -3,11 +3,14 @@ import { createRoot } from 'react-dom/client'
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import App from './App.jsx'
 import './index.css'
+import ReactPWAInstallProvider from './PWA/ReactPWAInstallContext.jsx';
 
 serviceWorkerRegistration.unregister();
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <ReactPWAInstallProvider enableLogging>
+      <App />
+    </ReactPWAInstallProvider>
   </StrictMode>,
 )

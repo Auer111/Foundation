@@ -5,11 +5,31 @@ import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import * as React from 'react';
 import Button from '@mui/material/Button';
+import { Snackbar } from '@mui/material'
+import { useReactPWAInstall } from './PWA/ReactPWAInstallContext'
 
 const supabase = createClient('https://kpfmmzljlaixrqyrcozk.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtwZm1temxqbGFpeHJxeXJjb3prIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjUzODMzODAsImV4cCI6MjA0MDk1OTM4MH0.OSRZwAC9hkX8I6rhhqo0ckVQm0dVUzZSc5RmDuBldc8')
 
 export default function App() {
   const [session, setSession] = useState(null)
+  const { pwaInstall, supported, isInstalled } = useReactPWAInstall();
+
+  const handlePwaClick = () => {
+    pwaInstall({
+      title: "Install Web App",
+      features: (
+        <ul>
+          <li>Cool feature 1</li>
+          <li>Cool feature 2</li>
+          <li>Even cooler feature</li>
+          <li>Works offline</li>
+        </ul>
+      ),
+      description: "This is how the install dialog looks like. Here you can describe your app briefly.",
+    })
+      .then(() => alert("App installed successfully or instructions for install shown"))
+      .catch(() => alert("User opted out from installing"));
+  };
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -31,16 +51,30 @@ export default function App() {
     setSession(null) // Clear the session
   }
 
+//   const PWA = () => {supported() && !isInstalled() && (
+//     <SnackbarContent
+//   message="Install app"
+//   action={<button onClick={handlePwaClick}></button>}/>)
+// }
+
+  const PWA = ()=><>{supported() && !isInstalled() && (
+    <button type="button" onClick={handlePwaClick} style={{ marginBottom: "50px", display: "block" }}>
+      Install app
+    </button>
+  )}</>
+
   if (!session) {
-    return (<Auth supabaseClient={supabase} providers={['google']} appearance={{ theme: ThemeSupa }} onlyThirdPartyProviders showLinks={false} localization={{
+    return (<><Auth supabaseClient={supabase} providers={['google']} appearance={{ theme: ThemeSupa }} onlyThirdPartyProviders showLinks={false} localization={{
       variables: {
         sign_up: {
           social_provider_text: 'Sign up with Google',
         },
       },
-    }}  />)
+    }}  /><PWA/></>)
   }
   else {
-    return (<Button variant='contained' onClick={handleLogout}>Log Out</Button>)
+    return (<Button variant='contained' onClick={handleLogout}>Log Out</Button> && <PWA/>)
   }
+
+  
 }
