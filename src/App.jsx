@@ -73,7 +73,7 @@ export default function App() {
     }}  /><PWA/></>)
   }
   else {
-    return (<Button variant='contained' onClick={handleLogout}>Log Out</Button> && <PWA/>)
+    return (<><Button variant='contained' onClick={handleLogout} style={{ width: "100%", marginBottom:"1em" }}>Log Out</Button><PWA/></>)
   }
 
   
