@@ -5,7 +5,6 @@ import { Auth } from '@supabase/auth-ui-react'
 import { ThemeSupa } from '@supabase/auth-ui-shared'
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import { Snackbar } from '@mui/material'
 import { useReactPWAInstall } from './PWA/ReactPWAInstallContext'
 
 //https://supabase.com/dashboard/project/
@@ -51,12 +50,6 @@ export default function App() {
     if (error) console.error('Error logging out:', error.message)
     setSession(null) // Clear the session
   }
-
-//   const PWA = () => {supported() && !isInstalled() && (
-//     <SnackbarContent
-//   message="Install app"
-//   action={<button onClick={handlePwaClick}></button>}/>)
-// }
 
   const PWA = ()=><>{supported() && !isInstalled() && (
     <Button type="button" onClick={handlePwaClick} variant="outlined" style={{ width: "100%" }}>
